@@ -1,3 +1,3 @@
 // Hello World in JavaScript
-// Author: Your Name 
+// Author: Dev
 console.log('Hello, Hacktoberfest from JavaScript!');
