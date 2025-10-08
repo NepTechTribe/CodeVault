@@ -1,0 +1,258 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Poppins, sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #58a6ff;
+  text-shadow: 0 0 10px rgba(88, 166, 255, 0.45);
+}
+
+.shape-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 35px;
+  justify-items: center;
+  width: 100%;
+  max-width: 960px;
+}
+
+.shape-card {
+  text-align: center;
+  width: 160px;
+  background: #16171b;
+  padding: 18px 14px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(88, 166, 255, 0.06);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.shape-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 28px rgba(88, 166, 255, 0.12);
+}
+
+.shape-card p {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #cfe6ff;
+}
+
+.shape {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.shape::before {
+  content: "";
+  display: block;
+  width: 80%;
+  height: 80%;
+  border-radius: 10px;
+  transition: transform 0.32s ease, filter 0.25s ease;
+}
+
+.shape-card:hover .shape::before {
+  filter: brightness(1.12);
+}
+
+/*=========================== Shapes from here ===================================== */
+.square::before {
+  background: #3498db;
+  width: 74%;
+  height: 74%;
+  border-radius: 8px;
+}
+.rectangle::before {
+  background: #9b59b6;
+  width: 86%;
+  height: 48%;
+  border-radius: 8px;
+}
+.circle::before {
+  background: #e74c3c;
+  width: 72%;
+  height: 72%;
+  border-radius: 50%;
+}
+.oval::before {
+  background: #16a085;
+  width: 84%;
+  height: 56%;
+  border-radius: 50%;
+}
+.triangle::before {
+  background: #f1c40f;
+  width: 72%;
+  height: 72%;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.diamond::before {
+  background: #2ecc71;
+  width: 60%;
+  height: 60%;
+  transform: rotate(45deg);
+  border-radius: 6px;
+}
+
+.trapezoid::before {
+  background: #f39c12;
+  width: 82%;
+  height: 58%;
+  clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+}
+.parallelogram::before {
+  background: #8e44ad;
+  width: 82%;
+  height: 58%;
+  transform: skewX(-18deg);
+}
+.pentagon::before {
+  background: #e67e22;
+  width: 76%;
+  height: 76%;
+  clip-path: polygon(50% 0%, 95% 35%, 78% 100%, 22% 100%, 5% 35%);
+}
+.hexagon::before {
+  background: #1abc9c;
+  width: 80%;
+  height: 56%;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+.heptagon::before {
+  background: #ff6347;
+  width: 78%;
+  height: 78%;
+  clip-path: polygon(
+    50% 0%,
+    85% 20%,
+    100% 55%,
+    70% 95%,
+    30% 95%,
+    0% 55%,
+    15% 20%
+  );
+}
+.octagon::before {
+  background: #ff69b4;
+  width: 72%;
+  height: 72%;
+  clip-path: polygon(
+    30% 0%,
+    70% 0%,
+    100% 30%,
+    100% 70%,
+    70% 100%,
+    30% 100%,
+    0% 70%,
+    0% 30%
+  );
+}
+.star::before {
+  background: #f1c40f;
+  width: 70%;
+  height: 70%;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+}
+.heart::before {
+  background: #e74c3c;
+  width: 72%;
+  height: 66%;
+  clip-path: polygon(50% 84%, 0% 30%, 25% 0%, 50% 20%, 75% 0%, 100% 30%);
+}
+.crescent::before {
+  background: #f39c12;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  box-shadow: -12px 0 0 #0d1117;
+}
+
+.cross::before {
+  background: #3498db;
+  width: 40%;
+  height: 80%;
+  clip-path: polygon(
+    35% 0%,
+    65% 0%,
+    65% 35%,
+    100% 35%,
+    100% 65%,
+    65% 65%,
+    65% 100%,
+    35% 100%,
+    35% 65%,
+    0% 65%,
+    0% 35%,
+    35% 35%
+  );
+}
+.arrow::before {
+  background: #2ecc71;
+  width: 60%;
+  height: 60%;
+  clip-path: polygon(
+    0 50%,
+    70% 0%,
+    70% 35%,
+    100% 35%,
+    100% 65%,
+    70% 65%,
+    70% 100%
+  );
+}
+.ribbon::before {
+  background: #9b59b6;
+  width: 70%;
+  height: 40%;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    75% 80%,
+    50% 100%,
+    25% 80%,
+    0 100%
+  );
+}
+.kite::before {
+  background: #ff6347;
+  width: 60%;
+  height: 80%;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+.rhombus::before {
+  background: #1abc9c;
+  width: 60%;
+  height: 60%;
+  transform: rotate(45deg);
+}
