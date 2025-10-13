@@ -6,8 +6,8 @@ import fullogo from "../assets/images/logo.png"; // Update the path if needed
 
 const Navbar = () => {
   const [sticky, setSticky] = useState(false);
-  const [darkMode, setDarkMode] = useState(false); // Default to light mode
   const [menuOpen, setMenuOpen] = useState(false);
+  const [logoClicked, setLogoClicked] = useState(false); // New state for logo click animation
 
   // Effect to handle sticky navbar on scroll
   useEffect(() => {
@@ -18,30 +18,17 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Effect to apply/remove dark mode class to <html> and save preference
-  useEffect(() => {
-    const savedDarkMode = localStorage.getItem("darkMode") === "true";
-    setDarkMode(savedDarkMode); // Initialize dark mode from localStorage
-  }, []);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.add("bg-gray-900"); // Apply dark background to HTML
-      document.documentElement.classList.add("text-gray-200"); // Apply dark text color to HTML
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.remove("bg-gray-900");
-      document.documentElement.classList.remove("text-gray-200");
-    }
-    localStorage.setItem("darkMode", darkMode); // Save dark mode preference
-  }, [darkMode]);
-
   // Framer Motion Variants for staggered animations
   const navLinkVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-    hover: { scale: 1.1, textShadow: "0px 0px 8px rgba(253, 224, 71, 0.8)" },
+    hover: {
+      scale: 1.1,
+      textShadow: "0px 0px 8px rgba(253, 224, 71, 0.8)", // Yellow glow on hover
+      backgroundColor: "rgba(253, 224, 71, 0.2)", // Subtle background change on hover
+      borderRadius: "8px", // Rounded corners for the background
+      transition: { duration: 0.2 },
+    },
     tap: { scale: 0.95 },
   };
 
@@ -62,14 +49,29 @@ const Navbar = () => {
   const menuItemVariants = {
     hidden: { opacity: 0, y: -10 },
     visible: { opacity: 1, y: 0 },
+    hover: {
+      scale: 1.05,
+      backgroundColor: "rgba(253, 224, 71, 0.2)", // Subtle background for mobile links
+      borderRadius: "8px",
+      transition: { duration: 0.2 },
+    },
+    tap: { scale: 0.98 },
+  };
+
+  const handleLogoClick = () => {
+    setLogoClicked(true);
+    // Reset logo animation state after it completes
+    setTimeout(() => {
+      setLogoClicked(false);
+    }, 1000); // Duration of the rotation animation
   };
 
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         sticky
-          ? "bg-black/90 dark:bg-gray-900/90 shadow-lg backdrop-blur-lg"
-          : "bg-black dark:bg-gray-900"
+          ? "bg-black/90 shadow-lg backdrop-blur-lg" // Slightly transparent black when sticky
+          : "bg-black" // Solid black when not sticky
       }`}
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
@@ -78,12 +80,15 @@ const Navbar = () => {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center"
+          className="flex items-center cursor-pointer" // Add cursor-pointer
+          onClick={handleLogoClick} // Handle click for rotation
         >
-          <img
+          <motion.img
             src={fullogo}
             alt="Nep Tech Tribe Logo"
             className="h-10 w-auto object-contain"
+            animate={{ rotate: logoClicked ? 360 : 0 }} // Rotate 360 degrees if clicked
+            transition={{ duration: 1, ease: "easeOut" }} // Smooth rotation
           />
         </motion.div>
 
@@ -91,7 +96,7 @@ const Navbar = () => {
         <motion.ul
           initial="hidden"
           animate="visible"
-          className="hidden md:flex space-x-8 text-white dark:text-gray-200 font-medium"
+          className="hidden md:flex space-x-2 text-white font-medium" // Reduced space-x to account for padding
         >
           {["Home", "About Us", "Blogs", "Events", "Contact Us"].map((item) => (
             <motion.li
@@ -99,6 +104,7 @@ const Navbar = () => {
               variants={navLinkVariants}
               whileHover="hover"
               whileTap="tap"
+              className="px-3 py-2" // Add padding to li for the background hover effect
             >
               <Link
                 to={
@@ -106,29 +112,18 @@ const Navbar = () => {
                     ? "/"
                     : `/${item.toLowerCase().replace(" ", "")}`
                 }
-                className="hover:text-yellow-400 transition-colors duration-300"
+                className="hover:text-yellow-400 transition-colors duration-300" // Yellow hover effect
               >
                 {item}
               </Link>
             </motion.li>
           ))}
-          <li>
-            <motion.button
-              whileHover={{ rotate: 15, scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setDarkMode(!darkMode)}
-              className="ml-4 p-2 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? "☀️" : "🌙"}
-            </motion.button>
-          </li>
         </motion.ul>
 
         {/* Hamburger Button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 rounded"
+          className="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 rounded" // White icon, yellow focus ring
           aria-label="Toggle Menu"
         >
           <motion.svg
@@ -167,14 +162,20 @@ const Navbar = () => {
             animate="visible"
             exit="exit"
             variants={menuVariants}
-            className="md:hidden bg-black/95 dark:bg-gray-900/95 text-white dark:text-gray-200"
+            className="md:hidden bg-black/95 text-white" // Slightly transparent black background for mobile menu
           >
             <motion.ul
               className="flex flex-col items-center space-y-5 py-6 font-medium text-lg"
             >
               {["Home", "About Us", "Blogs", "Events", "Contact Us"].map(
                 (item) => (
-                  <motion.li key={item} variants={menuItemVariants}>
+                  <motion.li
+                    key={item}
+                    variants={menuItemVariants}
+                    whileHover="hover" // Apply hover animation to mobile items
+                    whileTap="tap"
+                    className="w-full text-center" // Make sure hover background fills width
+                  >
                     <Link
                       to={
                         item === "Home"
@@ -189,17 +190,6 @@ const Navbar = () => {
                   </motion.li>
                 )
               )}
-              <motion.li variants={menuItemVariants}>
-                <motion.button
-                  whileHover={{ rotate: 15, scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => setDarkMode(!darkMode)}
-                  className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                  aria-label="Toggle dark mode"
-                >
-                  {darkMode ? "☀️" : "🌙"}
-                </motion.button>
-              </motion.li>
             </motion.ul>
           </motion.div>
         )}
