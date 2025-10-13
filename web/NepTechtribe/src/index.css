@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Add dark mode styles if not present */
+@layer base {
+  .dark body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+  .dark a {
+    color: #d1d5db;
+  }
+}
