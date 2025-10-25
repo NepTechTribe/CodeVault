@@ -2,7 +2,7 @@
   <h1>🎹 Retro Beat Maker🥁🎶</h1>
   <img src="https://github.com/user-attachments/assets/2df0de55-5915-4a79-8214-ae23f14353c6" alt="Hacktoberfest Banner" width="100%" style="max-width: 800px; border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.3); transition: transform 0.3s;"/>
   <h3>✨ Craft Epic 8-Bit Beats with a Retro Vibe! ✨</h3>
-  <p>Welcome to <b>Retro Beat Maker</b>, a Hacktoberfest project where you can create, record, and save pixel-powered drum patterns in a neon-drenched, retro-inspired interface. Perfect for first-time contributors and music-making enthusiasts! 🎉</p>
+  <p>Welcome to <b>Retro Beat Maker</b>, a Hacktoberfest project where you can create, record, and save pixel-powered drum patterns in a neon-drenched, retro-inspired interface. </p>
   <a href="https://hacktoberfest.com" target="_blank"><button style="background: #ff6200; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-family: 'Press Start 2P', cursive;">Join Hacktoberfest!</button></a>
 </div>
 
