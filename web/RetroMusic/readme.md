@@ -38,6 +38,3 @@ Retro Beat Maker is an interactive web app that lets you:
 
 <div align="center">
   <h2>🎉 Drop Beats, Not Bugs! 🎉</h2>
-  <p>Let’s make Retro Beat Maker the ultimate Hacktoberfest jam session. Add your creative spark and help build a pixel-perfect music machine! 🚀</p>
-  <p><b>Happy Coding & Beat Making!</b> 🖥️🎶</p>
-</div>
