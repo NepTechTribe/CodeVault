@@ -6,6 +6,7 @@
 - [rishabh3562](https://github.com/rishabh3562)
 - [Upendra48](https://github.com/Upendra48)
 - [Xtha-Sunil](https://github.com/Xtha-Sunil)
+- [damousis](https://github.com/damousis)
 - [claygro](https://github.com/claygro)
 - [sweatypenguin624](https://github.com/sweatypenguin624)
 - [anishk85](https://github.com/anishk85)
