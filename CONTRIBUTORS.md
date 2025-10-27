@@ -1,6 +1,6 @@
 - [devsdenepal](https://github.com/devsdenepal)
-- [github-actions[bot]](https://github.com/apps/github-actions)
 - [sabin-khatri](https://github.com/sabin-khatri)
+- [github-actions[bot]](https://github.com/apps/github-actions)
 - [GajendraAwasthi](https://github.com/GajendraAwasthi)
 - [chetx27](https://github.com/chetx27)
 - [anishk85](https://github.com/anishk85)
