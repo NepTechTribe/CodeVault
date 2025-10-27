@@ -4,7 +4,6 @@
 const nameInput = document.getElementById('name');
 const output = document.getElementById('output');
 
-// Save name to localStorage
 function saveName() {
   const name = nameInput.value.trim();
   if (name === '') {
@@ -13,10 +12,9 @@ function saveName() {
   }
   localStorage.setItem('userName', name);
   alert('Name saved!');
-  loadName(); // Update display
+  loadName(); 
 }
 
-// Load name from localStorage
 function loadName() {
   const savedName = localStorage.getItem('userName');
   if (savedName) {
@@ -26,7 +24,7 @@ function loadName() {
   }
 }
 
-// Clear name from localStorage
+
 function clearName() {
   localStorage.removeItem('userName');
   output.innerHTML = `Saved name: <strong>None</strong>`;
@@ -34,5 +32,4 @@ function clearName() {
   alert('Name cleared!');
 }
 
-// Load on page start
 loadName();
