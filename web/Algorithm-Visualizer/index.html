@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithm Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sorting Algorithm Visualizer</h1>
+            <p>Interactive visualization of sorting algorithms to help you understand how they work</p>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="algorithm-select">Algorithm:</label>
+                <select id="algorithm-select">
+                    <option value="bubble">Bubble Sort</option>
+                    <option value="selection">Selection Sort</option>
+                    <option value="insertion">Insertion Sort</option>
+                    <option value="quick">Quick Sort</option>
+                    <option value="merge">Merge Sort</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="array-size">Array Size:</label>
+                <input type="range" id="array-size" min="10" max="100" value="50">
+                <span id="array-size-value">50</span>
+            </div>
+
+            <div class="control-group">
+                <label for="speed">Speed:</label>
+                <input type="range" id="speed" min="1" max="10" value="5">
+                <span id="speed-value">5</span>
+            </div>
+
+            <div class="control-group">
+                <button id="generate-array" class="btn">Generate New Array</button>
+                <button id="start-sort" class="btn primary">Start Sorting</button>
+                <button id="stop-sort" class="btn danger" disabled>Stop</button>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-label">Comparisons:</span>
+                <span id="comparisons">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Swaps:</span>
+                <span id="swaps">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Time:</span>
+                <span id="time">0ms</span>
+            </div>
+        </div>
+
+        <div class="visualization-container">
+            <div id="bars-container" class="bars-container"></div>
+        </div>
+
+        <div class="algorithm-info">
+            <h3 id="algorithm-title">Bubble Sort</h3>
+            <p id="algorithm-description">
+                Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, 
+                compares adjacent elements and swaps them if they are in the wrong order. 
+                The pass through the list is repeated until the list is sorted.
+            </p>
+            <div class="complexity">
+                <div class="complexity-item">
+                    <span class="complexity-label">Time Complexity:</span>
+                    <span id="time-complexity">O(n²)</span>
+                </div>
+                <div class="complexity-item">
+                    <span class="complexity-label">Space Complexity:</span>
+                    <span id="space-complexity">O(1)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

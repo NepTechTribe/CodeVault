@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Number Guessing Game</h1>
+            <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
+        </header>
+
+        <div class="game-container">
+            <div class="game-info">
+                <div class="stat">
+                    <span class="stat-label">Attempts:</span>
+                    <span id="attempts">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Best Score:</span>
+                    <span id="best-score">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Games Won:</span>
+                    <span id="games-won">0</span>
+                </div>
+            </div>
+
+            <div class="game-area">
+                <div class="guess-container">
+                    <input type="number" id="guess-input" placeholder="Enter your guess (1-100)" min="1" max="100">
+                    <button id="guess-btn" class="btn primary">Guess</button>
+                </div>
+
+                <div class="feedback" id="feedback">
+                    <p>Start guessing to begin!</p>
+                </div>
+
+                <div class="range-indicator">
+                    <div class="range-bar">
+                        <div class="range-fill" id="range-fill"></div>
+                    </div>
+                    <div class="range-labels">
+                        <span id="min-range">1</span>
+                        <span id="max-range">100</span>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button id="new-game-btn" class="btn secondary">New Game</button>
+                    <button id="hint-btn" class="btn hint" disabled>Get Hint</button>
+                </div>
+            </div>
+
+            <div class="difficulty-selector">
+                <h3>Choose Difficulty:</h3>
+                <div class="difficulty-options">
+                    <button class="difficulty-btn active" data-difficulty="easy">Easy (1-50)</button>
+                    <button class="difficulty-btn" data-difficulty="medium">Medium (1-100)</button>
+                    <button class="difficulty-btn" data-difficulty="hard">Hard (1-200)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>How to Play:</h3>
+            <ul>
+                <li>🎯 Guess a number within the given range</li>
+                <li>📊 Get feedback on whether your guess is too high or too low</li>
+                <li>🎉 Try to guess the number in as few attempts as possible</li>
+                <li>💡 Use hints if you get stuck!</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

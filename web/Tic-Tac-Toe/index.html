@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Tic-Tac-Toe</h1>
+            <p>Classic game with a modern twist!</p>
+        </header>
+
+        <div class="game-container">
+            <div class="game-info">
+                <div class="player-info">
+                    <div class="player current-player" id="player-x">
+                        <span class="player-symbol">❌</span>
+                        <span class="player-name">Player X</span>
+                        <span class="player-score" id="score-x">0</span>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="player" id="player-o">
+                        <span class="player-symbol">⭕</span>
+                        <span class="player-name">Player O</span>
+                        <span class="player-score" id="score-o">0</span>
+                    </div>
+                </div>
+                
+                <div class="game-status">
+                    <div class="current-turn" id="current-turn">❌ Player X's Turn</div>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-label">Games Played:</span>
+                            <span id="games-played">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Draws:</span>
+                            <span id="draws">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-board">
+                <div class="board-grid" id="game-board">
+                    <div class="cell" data-index="0"></div>
+                    <div class="cell" data-index="1"></div>
+                    <div class="cell" data-index="2"></div>
+                    <div class="cell" data-index="3"></div>
+                    <div class="cell" data-index="4"></div>
+                    <div class="cell" data-index="5"></div>
+                    <div class="cell" data-index="6"></div>
+                    <div class="cell" data-index="7"></div>
+                    <div class="cell" data-index="8"></div>
+                </div>
+            </div>
+
+            <div class="game-controls">
+                <button id="new-game-btn" class="btn primary">New Game</button>
+                <button id="reset-scores-btn" class="btn secondary">Reset Scores</button>
+            </div>
+
+            <div class="game-modes">
+                <h3>Game Mode:</h3>
+                <div class="mode-options">
+                    <button class="mode-btn active" data-mode="player">👥 Player vs Player</button>
+                    <button class="mode-btn" data-mode="ai">🤖 Player vs AI</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>How to Play:</h3>
+            <ul>
+                <li>🎯 Take turns placing your symbol (❌ or ⭕) on the board</li>
+                <li>🏆 Get three in a row (horizontal, vertical, or diagonal) to win</li>
+                <li>🤝 If all squares are filled with no winner, it's a draw</li>
+                <li>🔄 Click "New Game" to start over</li>
+            </ul>
+        </div>
+
+        <div class="winning-line" id="winning-line"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

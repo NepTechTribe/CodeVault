@@ -4,6 +4,7 @@
 
 import random
 import string
+import pyperclip  # ✅ New addition for clipboard support
 
 def generate_password(length):
     """Generate a random password with letters, numbers, and symbols."""
@@ -51,6 +52,20 @@ def main():
     if password:
         print(f"\nGenerated Password: {password}")
         print(f"Length: {len(password)} characters")
+
+        # ✅ Password strength indicator
+        if length < 8:
+            print("⚠️ Strength: Weak — consider using at least 8 characters.")
+        elif length < 12:
+            print("🟡 Strength: Moderate — good for temporary use.")
+        else:
+            print("🟢 Strength: Strong — suitable for secure use.")
+
+        # ✅ Option to copy password to clipboard
+        copy = input("\nCopy password to clipboard? (y/n): ").strip().lower()
+        if copy == 'y':
+            pyperclip.copy(password)
+            print("📋 Password copied to clipboard!")
 
 if __name__ == "__main__":
     main()

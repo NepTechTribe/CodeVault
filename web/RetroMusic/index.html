@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Beat Maker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive, 'Courier New', monospace;
+        }
+
+        body {
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            color: #00ff00;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            border: 4px solid #ff00ff;
+            border-radius: 0;
+            background: #000;
+            padding: 20px;
+            box-shadow: 
+                0 0 20px #ff00ff,
+                inset 0 0 20px #0000ff;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid #00ffff;
+            z-index: -1;
+            border-radius: 0;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #111;
+            border: 3px solid #ff00ff;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ff00ff;
+            text-shadow: 
+                0 0 10px #ff00ff,
+                0 0 20px #ff00ff;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #00ffff;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .flashing-text {
+            animation: flash 1s infinite;
+            color: #ffff00;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .drum-machine {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .drum-pad {
+            aspect-ratio: 1;
+            background: linear-gradient(145deg, #222, #000);
+            border: 3px solid #444;
+            border-radius: 0;
+            color: #0f0;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.1s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                inset 0 0 10px #000,
+                0 5px 0 #333;
+            text-shadow: 0 0 5px #0f0;
+        }
+
+        .drum-pad:hover {
+            border-color: #ff00ff;
+            transform: translateY(2px);
+            box-shadow: 
+                inset 0 0 10px #000,
+                0 3px 0 #333;
+        }
+
+        .drum-pad:active, .drum-pad.active {
+            transform: translateY(5px);
+            box-shadow: 
+                inset 0 0 15px #000,
+                0 0px 0 #333;
+            background: linear-gradient(145deg, #000, #222);
+            border-color: #ffff00;
+        }
+
+        .drum-icon {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 3px #0f0);
+        }
+
+        .drum-name {
+            font-size: 0.7rem;
+            margin-bottom: 5px;
+            color: #00ffff;
+        }
+
+        .drum-key {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: #ff00ff;
+            color: #000;
+            padding: 2px 6px;
+            font-size: 0.8rem;
+            border: 1px solid #fff;
+        }
+
+        .control-panel {
+            background: #111;
+            border: 3px solid #00ffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .control-btn {
+            background: linear-gradient(to bottom, #ff00ff, #800080);
+            border: 2px solid #ffff00;
+            color: #fff;
+            padding: 12px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .control-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .control-btn:hover::before {
+            left: 100%;
+        }
+
+        .control-btn:hover {
+            background: linear-gradient(to bottom, #ffff00, #ff8000);
+            color: #000;
+            border-color: #ff00ff;
+        }
+
+        .control-btn:active {
+            transform: scale(0.95);
+        }
+
+        .control-btn.record {
+            background: linear-gradient(to bottom, #ff0000, #800000);
+        }
+
+        .control-btn.play {
+            background: linear-gradient(to bottom, #00ff00, #008000);
+        }
+
+        .control-btn.clear {
+            background: linear-gradient(to bottom, #ffff00, #808000);
+        }
+
+        .control-btn.save {
+            background: linear-gradient(to bottom, #00ffff, #008080);
+        }
+
+        .recording-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+            background: #111;
+            border: 2px solid #ff0000;
+            margin-top: 10px;
+        }
+
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        .beat-library {
+            background: #111;
+            border: 3px solid #ffff00;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .beat-library h3 {
+            color: #ffff00;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .beat-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .beat-item {
+            background: #222;
+            border: 1px solid #00ffff;
+            padding: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .beat-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .beat-action-btn {
+            background: #333;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 3px 6px;
+            font-size: 0.6rem;
+            cursor: pointer;
+        }
+
+        .beat-action-btn.play {
+            background: #008000;
+        }
+
+        .beat-action-btn.delete {
+            background: #800000;
+        }
+
+        .visualizer {
+            height: 60px;
+            background: #000;
+            border: 2px solid #00ff00;
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            padding: 5px;
+            overflow: hidden;
+        }
+
+        .v-bar {
+            flex: 1;
+            background: #00ff00;
+            transition: height 0.1s;
+            box-shadow: 0 0 5px #0f0;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        .screen-curvature {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.3) 100%);
+        }
+
+        @media (max-width: 768px) {
+            .drum-machine {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .control-panel {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .drum-machine {
+                grid-template-columns: 1fr;
+            }
+            
+            .drum-pad {
+                aspect-ratio: 2/1;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="screen-curvature"></div>
+    
+    <div class="container">
+        <header>
+            <h1>RETRO BEAT MAKER</h1>
+            <p class="subtitle">CREATE 8-BIT DRUM PATTERNS</p>
+            <p class="flashing-text">PRESS KEYS OR CLICK PADS</p>
+        </header>
+
+        <div class="visualizer" id="visualizer">
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+        </div>
+
+        <div class="drum-machine">
+        </div>
+
+        <div class="control-panel">
+            <button class="control-btn record" id="record-btn">● RECORD</button>
+            <button class="control-btn play" id="play-btn" disabled>▶ PLAY</button>
+            <button class="control-btn clear" id="clear-btn" disabled>✕ CLEAR</button>
+            <button class="control-btn save" id="save-btn" disabled>💾 SAVE</button>
+        </div>
+
+        <div class="recording-status" id="recording-status" style="display: none;">
+            <div class="pulse-dot"></div>
+            <span>RECORDING IN PROGRESS...</span>
+        </div>
+
+        <div class="beat-library">
+            <h3>BEAT LIBRARY</h3>
+            <div class="beat-list" id="beat-list">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>RETRO BEAT MAKER v1.0 • PRESS A-L KEYS TO PLAY • MADE WITH PIXEL POWER</p>
+    </footer>
+
+    <script>
+        const drumKit = [
+            { id: 'kick', name: 'BASS DRUM', key: 'A', icon: '💥' },
+            { id: 'snare', name: 'SNARE', key: 'S', icon: '🎯' },
+            { id: 'clap', name: 'HAND CLAP', key: 'D', icon: '👏' },
+            { id: 'hihat', name: 'HI-HAT', key: 'F', icon: '⚡' },
+            { id: 'openhat', name: 'OPEN HAT', key: 'G', icon: '🌀' },
+            { id: 'tom', name: 'TOM', key: 'H', icon: '🥁' },
+            { id: 'crash', name: 'CRASH', key: 'J', icon: '💫' },
+            { id: 'ride', name: 'RIDE', key: 'K', icon: '⭐' },
+            { id: 'cowbell', name: 'COWBELL', key: 'L', icon: '🔔' }
+        ];
+        let isRecording = false;
+        let recordedBeat = [];
+        let recordingStartTime;
+        let savedBeats = JSON.parse(localStorage.getItem('retroBeats')) || [];
+        let audioContext;
+
+        function initDrumMachine() {
+            const drumMachine = document.querySelector('.drum-machine');
+            
+            drumKit.forEach(drum => {
+                const drumPad = document.createElement('button');
+                drumPad.className = 'drum-pad';
+                drumPad.dataset.sound = drum.id;
+                drumPad.innerHTML = `
+                    <div class="drum-icon">${drum.icon}</div>
+                    <div class="drum-name">${drum.name}</div>
+                    <div class="drum-key">${drum.key}</div>
+                `;
+                
+                drumPad.addEventListener('click', () => playDrumSound(drum.id, drumPad));
+                drumMachine.appendChild(drumPad);
+            });
+            
+            renderSavedBeats();
+        }
+
+        function initAudio() {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        function playDrumSound(soundId, element) {
+            if (!audioContext) {
+                initAudio();
+            }
+            
+            if (element) {
+                element.classList.add('active');
+                setTimeout(() => element.classList.remove('active'), 150);
+            }
+            
+            updateVisualizer();
+            
+            playRetroSound(soundId);
+            
+            if (isRecording) {
+                const time = Date.now() - recordingStartTime;
+                recordedBeat.push({ sound: soundId, time: time });
+                document.getElementById('save-btn').disabled = false;
+            }
+        }
+
+        function playRetroSound(soundId) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            const filter = audioContext.createBiquadFilter();
+            
+            oscillator.connect(filter);
+            filter.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            let frequency = 200;
+            let duration = 0.3;
+            let type = 'square';
+            
+            switch(soundId) {
+                case 'kick':
+                    frequency = 80;
+                    duration = 0.5;
+                    type = 'sine';
+                    break;
+                case 'snare':
+                    frequency = 180;
+                    duration = 0.2;
+                    type = 'square';
+                    break;
+                case 'clap':
+                    frequency = 500;
+                    duration = 0.1;
+                    type = 'sawtooth';
+                    break;
+                case 'hihat':
+                    frequency = 800;
+                    duration = 0.1;
+                    type = 'square';
+                    break;
+                case 'openhat':
+                    frequency = 600;
+                    duration = 0.4;
+                    type = 'sawtooth';
+                    break;
+                case 'tom':
+                    frequency = 150;
+                    duration = 0.3;
+                    type = 'sine';
+                    break;
+                case 'crash':
+                    frequency = 400;
+                    duration = 1.0;
+                    type = 'sawtooth';
+                    break;
+                case 'ride':
+                    frequency = 300;
+                    duration = 0.8;
+                    type = 'square';
+                    break;
+                case 'cowbell':
+                    frequency = 600;
+                    duration = 0.2;
+                    type = 'square';
+                    break;
+            }
+            
+            oscillator.type = type;
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            
+            if (soundId === 'kick') {
+                oscillator.frequency.exponentialRampToValueAtTime(50, audioContext.currentTime + duration);
+            }
+            
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(1000, audioContext.currentTime);
+            
+            gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+        function updateVisualizer() {
+            const bars = document.querySelectorAll('.v-bar');
+            bars.forEach(bar => {
+                const randomHeight = Math.floor(Math.random() * 50) + 10;
+                bar.style.height = `${randomHeight}px`;
+                    setTimeout(() => {
+                    bar.style.height = '5px';
+                }, 100);
+            });
+        }
+        document.getElementById('record-btn').addEventListener('click', toggleRecording);
+        document.getElementById('play-btn').addEventListener('click', playRecording);
+        document.getElementById('clear-btn').addEventListener('click', clearRecording);
+        document.getElementById('save-btn').addEventListener('click', saveRecording);
+
+        function toggleRecording() {
+            const recordBtn = document.getElementById('record-btn');
+            const playBtn = document.getElementById('play-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const recordingStatus = document.getElementById('recording-status');
+            
+            if (!isRecording) {
+                isRecording = true;
+                recordedBeat = [];
+                recordingStartTime = Date.now();
+                recordBtn.textContent = '■ STOP';
+                recordBtn.style.background = 'linear-gradient(to bottom, #ffff00, #808000)';
+                recordingStatus.style.display = 'flex';
+                playBtn.disabled = true;
+                clearBtn.disabled = true;
+            } else {
+                isRecording = false;
+                recordBtn.textContent = '● RECORD';
+                recordBtn.style.background = 'linear-gradient(to bottom, #ff00ff, #800080)';
+                recordingStatus.style.display = 'none';
+                
+                if (recordedBeat.length > 0) {
+                    playBtn.disabled = false;
+                    clearBtn.disabled = false;
+                }
+            }
+        }
+
+        function playRecording() {
+            if (recordedBeat.length === 0) return;
+            
+            recordedBeat.forEach(note => {
+                setTimeout(() => {
+                    const drumPad = document.querySelector(`[data-sound="${note.sound}"]`);
+                    playDrumSound(note.sound, drumPad);
+                }, note.time);
+            });
+        }
+
+        function clearRecording() {
+            recordedBeat = [];
+            document.getElementById('play-btn').disabled = true;
+            document.getElementById('clear-btn').disabled = true;
+            document.getElementById('save-btn').disabled = true;
+        }
+
+        function saveRecording() {
+            const beatName = `BEAT_${savedBeats.length + 1}`;
+            savedBeats.push({
+                name: beatName,
+                notes: recordedBeat
+            });
+            
+            localStorage.setItem('retroBeats', JSON.stringify(savedBeats));
+            renderSavedBeats();
+            
+            const saveBtn = document.getElementById('save-btn');
+            saveBtn.textContent = '✓ SAVED!';
+            setTimeout(() => {
+                saveBtn.textContent = '💾 SAVE';
+            }, 1000);
+        }
+
+        function renderSavedBeats() {
+            const beatList = document.getElementById('beat-list');
+            beatList.innerHTML = '';
+            
+            savedBeats.forEach((beat, index) => {
+                const beatItem = document.createElement('div');
+                beatItem.className = 'beat-item';
+                beatItem.innerHTML = `
+                    <span>${beat.name}</span>
+                    <div class="beat-actions">
+                        <button class="beat-action-btn play" data-index="${index}">PLAY</button>
+                        <button class="beat-action-btn delete" data-index="${index}">DEL</button>
+                    </div>
+                `;
+                beatList.appendChild(beatItem);
+            });
+            
+            document.querySelectorAll('.beat-action-btn.play').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = e.target.dataset.index;
+                    playSavedBeat(index);
+                });
+            });
+            
+            document.querySelectorAll('.beat-action-btn.delete').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = e.target.dataset.index;
+                    deleteSavedBeat(index);
+                });
+            });
+        }
+
+        function playSavedBeat(index) {
+            const beat = savedBeats[index];
+            if (!beat) return;
+            
+            beat.notes.forEach(note => {
+                setTimeout(() => {
+                    const drumPad = document.querySelector(`[data-sound="${note.sound}"]`);
+                    playDrumSound(note.sound, drumPad);
+                }, note.time);
+            });
+        }
+
+        function deleteSavedBeat(index) {
+            savedBeats.splice(index, 1);
+            localStorage.setItem('retroBeats', JSON.stringify(savedBeats));
+            renderSavedBeats();
+        }
+
+        document.addEventListener('keydown', (event) => {
+            const key = event.key.toUpperCase();
+            
+            drumKit.forEach(drum => {
+                if (drum.key === key) {
+                    const drumPad = document.querySelector(`[data-sound="${drum.id}"]`);
+                    playDrumSound(drum.id, drumPad);
+                }
+            });
+        });
+        window.addEventListener('load', () => {
+            initDrumMachine();
+            initAudio();
+        });
+    </script>
+</body>
+</html>
