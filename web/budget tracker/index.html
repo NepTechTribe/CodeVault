@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CDN -->
+</head>
+<body class="bg-gray-200 flex justify-center items-center h-screen">
+
+   <div class="bg-white p-6 rounded-lg w-96 shadow-xl">
+    <h1 class="text-center text-2xl font-semibold mb-4">Budget Tracker</h1>
+    
+    <div class="text-center mb-4">
+        <h2 class="text-lg">Your Balance</h2>
+        <h3 id="balance" class="text-3xl font-bold">$0.00</h3>
+    </div>
+    
+    <div class="flex justify-between mb-4">
+        <div class="text-center">
+            <h3 class="text-sm">Income</h3>
+            <p id="income" class="text-green-500 text-lg">+NPR0.00</p>
+        </div>
+        <div class="text-center">
+            <h3 class="text-sm">Expense</h3>
+            <p id="expense" class="text-red-500 text-lg">-NPR0.00</p>
+        </div>
+    </div>
+
+    <h3 class="text-lg mb-2">Add New Transaction</h3>
+    <form action="" id="transaction-form" class="mb-4">
+        <label for="text" class="block text-sm mb-1">Text</label>
+        <input type="text" id="text" placeholder="Enter Description" class="w-full p-2 mb-4 border rounded border-gray-300" />
+
+        <label for="amount" class="block text-sm mb-1">Amount</label>
+        <input type="number" id="amount" placeholder="Enter Amount.....(negative - expense, positive - income)" class="w-full p-2 mb-4 border rounded border-gray-300" />
+
+        <button type="submit" class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition">Add Transaction</button>
+    </form>
+
+    <h3 class="text-lg mb-2">History</h3>
+    <ul id="list" class="list-none p-0">
+    </ul>
+
+   </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
