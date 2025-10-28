@@ -8,5 +8,6 @@
 - [Upendra48](https://github.com/Upendra48)
 - [Xtha-Sunil](https://github.com/Xtha-Sunil)
 - [damousis](https://github.com/damousis)
+- [Nitanshu12](https://github.com/Nitanshu12)
 - [claygro](https://github.com/claygro)
 - [sweatypenguin624](https://github.com/sweatypenguin624)
