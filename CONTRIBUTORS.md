@@ -9,5 +9,6 @@
 - [Upendra48](https://github.com/Upendra48)
 - [damousis](https://github.com/damousis)
 - [Nitanshu12](https://github.com/Nitanshu12)
+- [Praneel-Shivarkar](https://github.com/Praneel-Shivarkar)
 - [claygro](https://github.com/claygro)
 - [sweatypenguin624](https://github.com/sweatypenguin624)
