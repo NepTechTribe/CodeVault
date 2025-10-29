@@ -11,4 +11,5 @@
 - [Nitanshu12](https://github.com/Nitanshu12)
 - [Praneel-Shivarkar](https://github.com/Praneel-Shivarkar)
 - [claygro](https://github.com/claygro)
+- [shyamatripathi](https://github.com/shyamatripathi)
 - [sweatypenguin624](https://github.com/sweatypenguin624)
