@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Footer from "./components/Footer";
+import Events from "./components/Events";
 
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
         <main className="pt-20">
                <Hero />
                <About />
+               <Events />
                <Footer />
         </main>
         
