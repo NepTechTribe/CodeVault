@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Events – Full Guide</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f5f5f5; }
+    .box { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    input, button, select { padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #ccc; border-radius: 5px; }
+    button { background: #007bff; color: white; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .output { margin-top: 20px; padding: 15px; background: #e9ecef; border-radius: 5px; }
+    .parent { background: #d4edda; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    .child { background: #fff3cd; padding: 10px; border-radius: 5px; }
+  </style>
+</head>
+<body onload="pageLoaded()">
+  <div class="box">
+    <h2>JavaScript Events – All in One</h2>
+
+    <!-- 1. onclick -->
+    <button onclick="buttonClicked()">Click Me (onclick)</button>
+
+    <!-- 2. onchange -->
+    <select onchange="optionChanged(this.value)">
+      <option value="">Choose color...</option>
+      <option value="red">Red</option>
+      <option value="blue">Blue</option>
+      <option value="green">Green</option>
+    </select>
+
+    <!-- 3. onkeydown -->
+    <input type="text" placeholder="Type here (onkeydown)" onkeydown="keyPressed(event)">
+
+    <!-- 4. onsubmit + preventDefault -->
+    <form id="myForm">
+      <input type="text" id="name" placeholder="Your name" required>
+      <button type="submit">Submit Form</button>
+    </form>
+
+    <!-- 5. addEventListener + Bubbling -->
+    <div class="parent" id="parent">
+      
+      <div class="child" id="child">Child Div (Click me!)</div>
+    </div>
+
+    <div class="output" id="output">Events will appear here...</div>
+  </div>
+
+  <script src="events.js"></script>
+</body>
+</html>
