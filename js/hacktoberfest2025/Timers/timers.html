@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Timers & Animation</title>
+  <style>
+    body { font-family: Arial;
+         padding: 20px;
+          background: #f0f8ff;
+         }
+    .box { max-width: 600px;
+         margin: auto;
+          background: white; 
+          padding: 20px;
+           border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+         }
+    button { padding: 10px 20px;
+         margin: 5px;
+          border: none; 
+          border-radius: 5px;
+           cursor: pointer;
+         }
+    .start { background: #28a745;
+         color: white;
+         }
+    .stop { background: #dc3545; 
+        color: white;
+     }
+    .reset { background: #ffc107;
+         color: black;
+         }
+    .countdown { font-size: 24px; 
+        font-weight: bold;
+         color: #007bff;
+          margin: 15px 0;
+         }
+    .box-animation { width: 100px;
+         height: 100px;
+          background: #ff6b6b;
+           margin: 20px 0; 
+           border-radius: 10px;
+         }
+    #log { margin-top: 20px;
+         padding: 10px;
+          background: #f8f9fa;
+           border-radius: 5px;
+            font-family: monospace;
+         }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>JS Timers & Animation</h2>
+
+    <!-- 1. setTimeout -->
+    <button class="start" onclick="showAlert()">Show Alert in 3s</button>
+
+    <!-- 2. setInterval (Countdown) -->
+    <button class="start" onclick="startCountdown()">Start Countdown</button>
+    <button class="stop" onclick="stopCountdown()">Stop</button>
+    <div class="countdown" id="countdown">10</div>
+
+    <!-- 3. Animation with setInterval -->
+    <button class="start" onclick="startAnimation()">Move Box</button>
+    <button class="stop" onclick="stopAnimation()">Stop</button>
+    <div class="box-animation" id="animatedBox"></div>
+
+    <!-- 4. Clock -->
+    <button class="start" onclick="startClock()">Start Clock</button>
+    <button class="stop" onclick="stopClock()">Stop</button>
+    <div id="clock" class="countdown">00:00:00</div>
+
+    <pre id="log">Console log will appear here...</pre>
+  </div>
+
+  <script src="timers.js"></script>
+</body>
+</html>
