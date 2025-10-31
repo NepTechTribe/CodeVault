@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WeatherVibe</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container">
+    <div class="weather-card">
+
+      <div class="search-box">
+        <input type="text" id="city-input" placeholder="Enter city name..." spellcheck="false" />
+        <button id="search-btn">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" alt="Search" />
+        </button>
+      </div>
+
+      <div class="error-msg">City not found!</div>
+
+      <div class="loading hidden">
+        <div class="spinner"></div>
+      </div>
+
+      <div class="weather-info hidden">
+        <img src="" alt="Weather" class="weather-icon" id="weather-icon" />
+        <h1 class="temp">0°C</h1>
+        <h2 class="city">City Name</h2>
+
+        <div class="details">
+          <div class="col">
+            <img src="https://img.icons8.com/fluency/48/4facfe/humidity.png" alt="Humidity" />
+            <div>
+              <p class="humidity">0%</p>
+              <p>Humidity</p>
+            </div>
+          </div>
+          <div class="col">
+            <img src="https://img.icons8.com/fluency/48/4facfe/wind.png" alt="Wind" />
+            <div>
+              <p class="wind">0 km/h</p>
+              <p>Wind Speed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
