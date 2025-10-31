@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import Events from "./components/Events";
+import ContactUs from "./components/ContactUs";
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
                <Hero />
                <About />
                <Events />
+               <ContactUs />
                <Footer />
         </main>
         
