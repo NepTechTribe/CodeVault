@@ -22,17 +22,14 @@ async function checkWeather(city) {
 
     const data = await response.json();
 
-    // Update UI
     document.querySelector('.city').textContent = data.name;
     document.querySelector('.temp').textContent = Math.round(data.main.temp) + "°C";
     document.querySelector('.humidity').textContent = data.main.humidity + "%";
     document.querySelector('.wind').textContent = data.wind.speed + " km/h";
 
-    // Dynamic Weather Icon from OpenWeatherMap
-    const iconCode = data.weather[0].icon; // e.g., "10d", "01n"
+    const iconCode = data.weather[0].icon;
     weatherIcon.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
-    // Show
     loading.classList.add('hidden');
     weatherInfo.classList.remove('hidden');
 
@@ -42,13 +39,11 @@ async function checkWeather(city) {
   }
 }
 
-// Events
 searchBtn.addEventListener('click', () => checkWeather(cityInput.value));
 cityInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') checkWeather(cityInput.value);
 });
 
-// Auto-load Kathmandu
 window.addEventListener('load', () => {
   cityInput.value = 'Kathmandu';
   checkWeather('Kathmandu');
