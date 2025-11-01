@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PomoFlow</title>
+
+  <!-- Tailwind CDN (No /namaste/) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      corePlugins: { preflight: false },
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          animation: {
+            pulse: 'pulse 2s infinite',
+            float: 'float 3s ease-in-out infinite',
+            fade: 'fadeIn 0.6s ease-out'
+          },
+          keyframes: {
+            pulse: { '0%, 100%': { opacity: 1 }, '50%': { opacity: 0.8 } },
+            float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+            fadeIn: { '0%': { opacity: 0, transform: 'translateY(20px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50 dark:from-gray-900 dark:to-teal-900 min-h-screen transition-all duration-500">
+
+  <div class="container max-w-4xl mx-auto p-4">
+    <div class="glass-card bg-white/30 dark:bg-gray-800/30 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-2xl border border-white/20">
+
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white animate-fade">PomoFlow</h1>
+        <button id="theme-toggle" class="p-3 rounded-xl bg-gray-200 dark:bg-gray-700 hover:scale-110 transition-all">
+          Dark Mode
+        </button>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- Timer -->
+        <div class="text-center animate-fade">
+          <div class="relative w-64 h-64 mx-auto mb-6">
+            <svg class="w-full h-full transform -rotate-90">
+              <circle cx="128" cy="128" r="120" stroke="currentColor" stroke-width="12" fill="none" class="text-gray-200 dark:text-gray-700"/>
+              <circle cx="128" cy="128" r="120" stroke="currentColor" stroke-width="12" fill="none" class="text-teal-500 dark:text-teal-400 timer-progress transition-all duration-1000" stroke-dasharray="754" stroke-dashoffset="754"/>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <p id="timer-mode" class="text-sm text-gray-600 dark:text-gray-400 font-medium">Focus Time</p>
+              <p id="timer-display" class="text-5xl font-bold text-gray-800 dark:text-white">25:00</p>
+            </div>
+          </div>
+
+          <div class="flex justify-center gap-4">
+            <button id="start-btn" class="px-6 py-3 bg-teal-500 text-white rounded-xl font-medium hover:bg-teal-600 active:scale-95 transition-all shadow-lg">Start</button>
+            <button id="reset-btn" class="px-6 py-3 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-white rounded-xl font-medium hover:bg-gray-400 dark:hover:bg-gray-500 active:scale-95 transition-all">Reset</button>
+          </div>
+
+          <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">Sessions today: <span id="session-count" class="font-bold text-teal-600 dark:text-teal-400">0</span></p>
+        </div>
+
+        <!-- Tasks -->
+        <div class="animate-fade">
+          <div class="flex gap-2 mb-4">
+            <input type="text" id="task-input" placeholder="Add a task..." class="flex-1 px-4 py-3 rounded-xl bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-100 dark:focus:ring-teal-900 transition-all"/>
+            <button id="add-task" class="px-4 py-3 bg-teal-500 text-white rounded-xl hover:bg-teal-600 active:scale-95 transition-all text-xl font-bold">+</button>
+          </div>
+
+          <div id="task-list" class="space-y-2 max-h-96 overflow-y-auto pr-2"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
